@@ -22,3 +22,6 @@ Primary Key, Wage decimal(3,2));
 
 Create Table SalaryEmployee(SalaryEmployeeID int references Employee(EmployeeID)
 Primary Key, Salary int);
+
+
+-- Andy's Changes
