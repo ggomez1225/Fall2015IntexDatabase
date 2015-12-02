@@ -22,3 +22,19 @@ Primary Key, Wage decimal(3,2));
 
 Create Table SalaryEmployee(SalaryEmployeeID int references Employee(EmployeeID)
 Primary Key, Salary int);
+
+Create Table Quote(QuoteID int default next value for NWLID Sequence Primary Key,
+QuoteAmount decimal(6,2), Compound varchar(100), QtyInMilligrams int, CustomerID
+int references Customer not null, WorkOrderID int references WorkOrder);
+
+Create Table WorkOrder(WorkOrderID int default next value for NWLID Sequence
+Primary Key, Comments varchar(1000), DiscountPercent decimal(2,2), TotalCharges
+decimal(4,2), Status varchar(100), QuoteID int references Quote, InvoiceID int
+references Invoice not null);
+
+Create Table Invoice(InvoiceID int default next value for NWLID Sequence
+Primary Key, DueDate date, EarlyPaymentDate date, EarlyPaymentDiscount decimal
+(2,2), WorkOrderID int references WorkOrder not null);
+
+Create Table Compound (LTNumber char(6) Primary Key, Name varchar(50),
+MolecularMass decimal(4,6));
