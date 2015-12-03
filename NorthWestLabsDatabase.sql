@@ -79,8 +79,8 @@ ClaimedWeight decimal(4,6),
 ActualWeight decimal(4,6),
 MaximumToleratedDose decimal(4,6)
 LTNumber char references Compound not null,
-EmployeeID int references Employee not null,
-WorkOrderID int references WorkOrder not null);
+WorkOrderID int references WorkOrder not null,
+EmployeeID int references Employee not null);
 
 Create Table Assay(
 AssayID int default next value for NWLID Sequence Primary Key,
@@ -126,3 +126,34 @@ Quantity decimal(4,2),
 TestID int references Test not null,
 MaterialID int references Material not null,
 Constraint TestMaterial_PK Primary Key(TestID, MaterialID));
+
+Create Table SampleTest(
+Hours decimal(3,2),
+CompoundSampleID int references CompoundSample not null,
+TestID int references Test not null,
+EmployeeID int references Employee not null,
+Constraint SampleTest_PK Primary Key(CompoundSampleID, TestID));
+
+Create Table AssayResult(
+AssayResultID int default next NWLID Sequence Primary Key,
+AssayID int references Assay not null);
+
+Create Table TestResult(
+TestResultID int default next MWLID Sequence Primary Key,
+TestID int references Test not null,
+AssayResultID int references AssayResult not null);
+
+Create Table File(
+FileID int default next NWLID Sequence Primary Key,
+FileURL varchar(150),
+TestResultID int references TestResult not null);
+
+Create Table QualitativeResultFile(
+QualitativeResultFileID int references File(FileID) Primary Key);
+
+Create Table QuantitativeResultFile(
+QuantitativeResultFileID int references File(FileID) Primary Key);
+
+Create Table Report(
+ReportID int references File(FileID) Primary Key,
+WorkOrderID int references WorkOrder not null);
