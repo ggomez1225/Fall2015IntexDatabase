@@ -19,8 +19,7 @@ Create Table WebUser(
 WebUserID int default next value for NWLID Sequence Primary Key,
 Username varchar(50),
 Password varchar(50),
-LegalEntityID int
-references LegalEntity not null);
+LegalEntityID int references LegalEntity not null);
 
 Create Table Customer(
 CustomerID int references LegalEntity(LegalEntityID) Primary Key,
