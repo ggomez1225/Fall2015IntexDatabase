@@ -20,6 +20,7 @@ CREATE TABLE WebUser (
   WebUserID int default next value for NWLID Sequence Primary Key,
   Username varchar(50),
   Password varchar(50),
+  SecurityAccessLevel int, 
   LegalEntityID int references LegalEntity not null
 );
 
